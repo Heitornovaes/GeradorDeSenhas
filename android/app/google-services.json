@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "720667871465",
+    "project_id": "gerador-senhas-app",
+    "storage_bucket": "gerador-senhas-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720667871465:android:39c66e0355306e594d4878",
+        "android_client_info": {
+          "package_name": "com.example.meu_gerador_senhas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIj0wEa2QSOAx_Evot3aQbzpNgY_JiK0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
