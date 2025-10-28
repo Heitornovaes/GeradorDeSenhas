@@ -1,11 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-// Importe nosso widget customizado
 import 'package:meu_gerador_senhas/widgets/custom_text_field.dart';
-
-// Importe as telas que vamos usar
 import 'package:meu_gerador_senhas/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,17 +12,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // Controladores para os campos de texto
+  
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   // Chave para o formulário
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  // Estado para controlar o loading
   bool _isLoading = false;
 
-  // Estado para controlar a visibilidade da senha
   bool _isPasswordVisible = false;
 
   @override
@@ -36,7 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  // Função de utilidade para mostrar SnackBar
   void _showErrorSnackBar(String message) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -47,37 +40,36 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Função para lidar com o Login
   Future<void> _login() async {
-    // 1. Validar o formulário
+   
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    // 2. Ativar o loading
+    
     setState(() {
       _isLoading = true;
     });
 
-    // 3. Lógica do Firebase (AGORA COM TRY-CATCH)
+    
     try {
       String email = _emailController.text.trim();
       String password = _passwordController.text.trim();
 
-      // Tenta fazer o login
+      
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // 4. Se o login deu certo, navegar para Home
+      
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const HomeScreen()),
         );
       }
     } on FirebaseAuthException catch (e) {
-      // 5. Lidar com erros do Firebase
+    
       String errorMessage = 'Ocorreu um erro. Tente novamente.';
       if (e.code == 'user-not-found') {
         errorMessage = 'Nenhum usuário encontrado com este e-mail.';
@@ -91,11 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
       _showErrorSnackBar(errorMessage);
     } catch (e) {
-      // Lidar com outros erros
+      
       _showErrorSnackBar('Um erro inesperado ocorreu.');
     }
 
-    // 6. Parar o loading (seja em sucesso ou erro)
+    
     if (mounted) {
       setState(() {
         _isLoading = false;
@@ -103,37 +95,37 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // Função para lidar com o Registro
+  
   Future<void> _register() async {
-    // 1. Validar o formulário
+    
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    // 2. Ativar o loading
+    
     setState(() {
       _isLoading = true;
     });
 
-    // 3. Lógica do Firebase (AGORA COM TRY-CATCH)
+    
     try {
       String email = _emailController.text.trim();
       String password = _passwordController.text.trim();
 
-      // Tenta criar o usuário
+    
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // 4. Se o registro deu certo, navegar para Home
+      
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const HomeScreen()),
         );
       }
     } on FirebaseAuthException catch (e) {
-      // 5. Lidar com erros do Firebase
+      
       String errorMessage = 'Ocorreu um erro. Tente novamente.';
       if (e.code == 'weak-password') {
         errorMessage = 'A senha é muito fraca.';
@@ -145,11 +137,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
       _showErrorSnackBar(errorMessage);
     } catch (e) {
-      // Lidar com outros erros
+      
       _showErrorSnackBar('Um erro inesperado ocorreu.');
     }
 
-    // 6. Parar o loading (seja em sucesso ou erro)
+    
     if (mounted) {
       setState(() {
         _isLoading = false;
@@ -159,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Define a cor de fundo com base na imagem do PDF
+    
     final Color backgroundColor = const Color(0xFFF0F4F8);
 
     return Scaffold(
@@ -173,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // 1. Ícone e Título
+               
                 Icon(
                   Icons.lock_outline,
                   size: 60,
@@ -199,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 32),
 
-                // 2. Campo de Email
+               
                 CustomTextField(
                   controller: _emailController,
                   label: 'Email',
@@ -216,12 +208,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
 
-                // 3. Campo de Senha
+               
                 CustomTextField(
                   controller: _passwordController,
                   label: 'Senha',
                   icon: Icons.lock_outline_rounded,
-                  isPassword: !_isPasswordVisible, // Controla visibilidade
+                  isPassword: !_isPasswordVisible,
                   validator: (password) {
                     if (password == null || password.isEmpty) {
                       return 'Por favor, insira sua senha.';
@@ -246,8 +238,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 24),
 
-                // 4. Botões (Entrar e Registrar)
-                // Usamos um 'if' para mostrar o loading ou os botões
+                
                 if (_isLoading)
                   const Center(
                     child: CircularProgressIndicator(),

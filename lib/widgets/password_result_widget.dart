@@ -11,11 +11,9 @@ class PasswordResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define a mensagem a ser mostrada
     final String displayPassword =
         (password.isEmpty) ? 'Senha não informada' : password;
 
-    // A cor muda se a senha existir
     final Color displayColor =
         (password.isEmpty) ? Colors.grey : Colors.black;
 
@@ -36,7 +34,6 @@ class PasswordResultWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Texto (Senha ou Placeholder)
           Expanded(
             child: Text(
               displayPassword,
@@ -49,16 +46,13 @@ class PasswordResultWidget extends StatelessWidget {
             ),
           ),
           
-          // Botão de Copiar (só aparece se houver senha)
           if (password.isNotEmpty)
             IconButton(
               icon: const Icon(Icons.copy_outlined),
               tooltip: 'Copiar Senha',
               onPressed: () {
-                // Copia para a área de transferência
                 Clipboard.setData(ClipboardData(text: password));
                 
-                // Mostra um feedback
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Senha copiada!'),

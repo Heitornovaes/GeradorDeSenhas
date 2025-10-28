@@ -26,13 +26,13 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         controller: controller,
-        obscureText: isPassword, // Esconde o texto se for senha
-        validator: validator, // Função de validação
-        keyboardType: keyboardType, // Tipo de teclado (ex: email)
+        obscureText: isPassword, 
+        validator: validator, 
+        keyboardType: keyboardType, 
         decoration: InputDecoration(
           labelText: label,
           prefixIcon: Icon(icon),
-          suffixIcon: suffixIcon, // Ícone no final (ex: olho da senha)
+          suffixIcon: suffixIcon, 
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),

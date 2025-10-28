@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Para copiar para o Clipboard
+import 'package:flutter/services.dart'; 
 import 'package:http/http.dart' as http;
-import 'dart:convert'; // Para jsonDecode (embora não usemos mais para esta API)
+import 'dart:convert'; 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -13,10 +13,10 @@ class NewPasswordScreen extends StatefulWidget {
 }
 
 class _NewPasswordScreenState extends State<NewPasswordScreen> {
-  // Variáveis de estado
+  
   double _passwordLength = 12.0;
   final double _minPasswordLength = 8.0;
-  final double _maxPasswordLength = 20.0; // Limite da API
+  final double _maxPasswordLength = 32.0;
 
   bool _includeUppercase = true;
   bool _includeLowercase = true;
@@ -29,7 +29,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
   final TextEditingController _labelController = TextEditingController();
   final User? _currentUser = FirebaseAuth.instance.currentUser;
 
-  // Função para mostrar SnackBar
+  
   void _showSnackBar(String message, {bool isError = false}) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -40,75 +40,88 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
     );
   }
 
-  // 1. GERAÇÃO DA SENHA (API PASSWORD.NINJA - CORRIGIDO v5)
+  
   Future<void> _generatePassword() async {
     setState(() {
       _isLoading = true;
-      _generatedPassword = 'Gerando...'; // Feedback visual
+      _generatedPassword = 'Gerando...';
     });
 
-    // Usando password.ninja/api/password
-    final queryParams = {
-      'minPassLength': _passwordLength.round().toString(),
-      'maxLength': _passwordLength.round().toString(),
-      'capitals': _includeUppercase.toString(),
-      'symbols': _includeSymbols.toString(),
-      'numAtEnd': _includeNumbers ? '3' : '0', // Adiciona números se solicitado
-      // numOfPasswords=1 (padrão) retorna plain text segundo cURL example
+    
+    final Map<String, dynamic> requestBody = {
+      'length': _passwordLength.round(),
+      'includeUppercase': _includeUppercase,
+      'includeLowercase': _includeLowercase,
+      'includeNumbers': _includeNumbers,
+      'includeSymbols': _includeSymbols,
     };
 
+    
     if (!_includeUppercase && !_includeLowercase && !_includeNumbers && !_includeSymbols) {
       _showSnackBar('Selecione pelo menos um tipo de caractere.', isError: true);
       setState(() { _isLoading = false; _generatedPassword = 'Erro: Selecione opções'; });
       return;
     }
 
-    // ENDPOINT CORRIGIDO AQUI: /api/password
-    final uri = Uri.https('password.ninja', '/api/password', queryParams);
+    // URL da API
+    final uri = Uri.parse('https://safekey-api-a1bd9aa97953.herokuapp.com/generate');
 
     try {
-      final response = await http.get(uri);
+      
+      final response = await http.post(
+        uri,
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8', 
+        },
+        body: jsonEncode(requestBody), 
+      );
 
       if (response.statusCode == 200) {
-        // Sucesso - API retorna plain text para numOfPasswords=1
-        String passwordResponse = response.body.trim();
+        
+        final Map<String, dynamic> data = jsonDecode(response.body);
 
-         // Remove colchetes e aspas se houver (caso retorne ["senha"])
-        passwordResponse = passwordResponse.replaceAll(RegExp(r'\["|"\]'), '');
+        
+        if (data.containsKey('password')) {
+          setState(() {
+            _generatedPassword = data['password'].toString();
+          });
+        } else {
+           _showSnackBar('Erro: A API não retornou uma senha válida.', isError: true);
+           setState(() { _generatedPassword = 'Erro na Resposta da API'; });
+        }
 
-        setState(() {
-          _generatedPassword = passwordResponse.isNotEmpty ? passwordResponse : "Erro: API retornou vazio";
-        });
-
+      } else if (response.statusCode == 400) {
+        
+         _showSnackBar('Erro ao gerar senha (Parâmetros Inválidos?).', isError: true);
+         setState(() { _generatedPassword = 'Erro ${response.statusCode}'; });
       } else {
-        // Erro do servidor
+       
         _showSnackBar('Erro ao gerar senha (Servidor: ${response.statusCode}).', isError: true);
-        setState(() { _generatedPassword = 'Erro na API (${response.statusCode})'; });
+        setState(() { _generatedPassword = 'Erro ${response.statusCode}'; });
       }
     } catch (e) {
-      // Erro de conexão
+     
       _showSnackBar('Erro de conexão. Verifique sua internet.', isError: true);
        setState(() { _generatedPassword = 'Erro de conexão'; });
     }
 
-    // Só para loading se não foi um erro de conexão/API
-     if (_generatedPassword != 'Erro de conexão' && !_generatedPassword.startsWith('Erro na API')) {
+    
+     if (!_generatedPassword.startsWith('Erro')) {
          setState(() {
            _isLoading = false;
          });
      } else {
-        // Se deu erro, para o loading e reseta a senha
+        
          setState(() {
            _isLoading = false;
-           _generatedPassword = 'Senha não informada'; // Reset visual
+           _generatedPassword = 'Senha não informada'; 
          });
      }
   }
 
- // --- O restante do código (salvar no Firestore, build, etc.) permanece igual ---
- // --- Apenas a função _generatePassword() foi atualizada ---
 
-  // 2. SALVAR SENHA NO FIRESTORE (COM ALERTDIALOG)
+
+
   Future<void> _showSavePasswordDialog() async {
     if (_generatedPassword == 'Senha não informada' || _isLoading || _generatedPassword.startsWith("Erro")) {
       _showSnackBar('Gere uma senha válida antes de salvar.', isError: true);
@@ -270,7 +283,8 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
         Text('Tamanho da senha: ${_passwordLength.round()}'),
         Slider(
           value: _passwordLength, min: _minPasswordLength, max: _maxPasswordLength,
-          divisions: (_maxPasswordLength - _minPasswordLength).round(),
+          
+          divisions: (_maxPasswordLength - _minPasswordLength).round(), 
           label: _passwordLength.round().toString(),
           onChanged: (value) => setState(() => _passwordLength = value.clamp(_minPasswordLength, _maxPasswordLength)),
         ),

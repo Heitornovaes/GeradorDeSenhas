@@ -4,10 +4,8 @@ import 'package:meu_gerador_senhas/firebase_options.dart';
 import 'package:meu_gerador_senhas/screens/splash_screen.dart'; 
 
 void main() async {
-  // Garante que o Flutter e os Widgets estejam prontos
   WidgetsFlutterBinding.ensureInitialized(); 
   
-  // Inicializa o Firebase usando o arquivo que o 'flutterfire' criou
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -23,12 +21,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Gerador de Senhas',
       theme: ThemeData(
-        // Você pode alterar as cores principais aqui
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(), // Nossa primeira tela
+      home: const SplashScreen(), 
     );
   }
 }
