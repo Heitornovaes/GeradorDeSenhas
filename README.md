@@ -8,33 +8,33 @@ Criar um aplicativo Flutter integrado ao Firebase Authentication e Cloud Firesto
 
 ## ✨ Funcionalidades Principais
 
-**Autenticação de Usuário:** Sistema completo de Login e Registro utilizando **Firebase Authentication** (Email/Senha).
-**Introdução (Onboarding):** Tela de introdução exibida apenas no primeiro uso, com opção para não mostrar novamente (usando **SharedPreferences**).
-**Geração de Senhas:**
+* **Autenticação de Usuário:** Sistema completo de Login e Registro utilizando **Firebase Authentication** (Email/Senha).
+* **Introdução (Onboarding):** Tela de introdução exibida apenas no primeiro uso, com opção para não mostrar novamente (usando **SharedPreferences**).
+* **Geração de Senhas:**
     * Consumo da API **Safekey** ([https://safekey-api-a1bd9aa97953.herokuapp.com/docs/](https://safekey-api-a1bd9aa97953.herokuapp.com/docs/)) via requisição `POST` com corpo `JSON`.
     * Configuração de parâmetros: tamanho da senha (`Slider`), inclusão de maiúsculas, minúsculas, números e símbolos (`SwitchListTile`).
     * Botão para copiar a senha gerada para a área de transferência.
-**Armazenamento Seguro:** As senhas geradas são salvas no **Cloud Firestore**, vinculadas ao ID do usuário autenticado. [cite_start]Um `AlertDialog` solicita um rótulo para cada senha antes de salvar.
- **Listagem e Gerenciamento:**
+* **Armazenamento Seguro:** As senhas geradas são salvas no **Cloud Firestore**, vinculadas ao ID do usuário autenticado. Um `AlertDialog` solicita um rótulo para cada senha antes de salvar.
+* **Listagem e Gerenciamento:**
     * A `HomeScreen` exibe as senhas salvas do usuário em tempo real, utilizando `StreamBuilder`.
     * Funcionalidade para **deletar** senhas individualmente.
     * Exibição de estado de lista vazia.
- **Interface:**
+* **Interface:**
     * Uso de animações **Lottie** na SplashScreen e IntroScreen.
     * Componentes reutilizáveis (ex: `CustomTextField`).
     * Feedback ao usuário com `SnackBar`s e indicadores de carregamento.
 
 ## 🛠️ Tecnologias Utilizadas
 
- **Linguagem:** Dart
-**Framework:** Flutter
-**Backend:** Firebase
+* **Linguagem:** Dart
+* **Framework:** Flutter
+* **Backend:** Firebase
     * Firebase Authentication
     * Cloud Firestore
-**Requisições HTTP:** Pacote `http`
-**Armazenamento Local:** `shared_preferences`
-**Animações:** `lottie`
-**UI Auxiliar:** `smooth_page_indicator`, `email_validator`
+* **Requisições HTTP:** Pacote `http`
+* **Armazenamento Local:** `shared_preferences`
+* **Animações:** `lottie`
+* **UI Auxiliar:** `smooth_page_indicator`, `email_validator`
 
 ## 📸 Telas (Screenshots)
 
@@ -48,13 +48,14 @@ Criar um aplicativo Flutter integrado ao Firebase Authentication e Cloud Firesto
 
 ![Tela de Geração de Senha](./screenshots/4.png)
 
+*(Nota: Certifique-se de que os nomes dos arquivos 1.png, 2.png, etc., correspondem às imagens corretas na pasta `screenshots`)*
 
 ## ⚙️ Como Executar o Projeto
 
 1.  **Clone o Repositório:**
     ```bash
-    git clone [https://github.com/Heitornovaes/GeradorDeSenhas.git]
-    cd GeradorDeSenhas
+    git clone [https://github.com/Heitornovaes/GeradorDeSenhas.git](https://github.com/Heitornovaes/GeradorDeSenhas.git)
+    cd GeradorDeSenhas 
     ```
 2.  **Configure o Ambiente Flutter:** Certifique-se de ter o [Flutter SDK](https://flutter.dev/docs/get-started/install) instalado e configurado corretamente no seu PATH.
 3.  **Configure o Firebase:**
