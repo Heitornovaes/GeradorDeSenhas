@@ -38,15 +38,15 @@ Criar um aplicativo Flutter integrado ao Firebase Authentication e Cloud Firesto
 
 ## 📸 Telas (Screenshots)
 
-![Tela de Splash](./screenshots/1.png)
+![Tela de Splash](screenshots/1.png)
 
-![Tela de Introdução](./screenshots/2.png)
+![Tela de Introdução](screenshots/2.png)
 
-![Tela de Login](./screenshots/3.png)
+![Tela de Login](screenshots/3.png)
 
-![Tela Home (Com Senhas)](./screenshots/5.png)
+![Tela Home (Com Senhas)](screenshots/5.png)
 
-![Tela de Geração de Senha](./screenshots/4.png)
+![Tela de Geração de Senha](screenshots/4.png)
 
 *(Nota: Certifique-se de que os nomes dos arquivos 1.png, 2.png, etc., correspondem às imagens corretas na pasta `screenshots`)*
 
