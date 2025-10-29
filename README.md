@@ -38,15 +38,15 @@ Aplicativo móvel desenvolvido em Flutter como exercício prático, com o objeti
 
 ## 📸 Telas (Screenshots)
 
-![Tela de Splash](screenshots/1.png)
+![Tela de Splash](./screenshots/1.png)
 
-![Tela de Introdução](screenshots/2.png)
+![Tela de Introdução](./screenshots/2.png)
 
-![Tela de Login](screenshots/3.png)
+![Tela de Login](./screenshots/3.png)
 
-![Tela Home (Com Senhas)](screenshots/5.png)
+![Tela Home (Com Senhas)](./screenshots/5.png)
 
-![Tela de Geração de Senha](screenshots/4.png)
+![Tela de Geração de Senha](./screenshots/4.png)
 
 
 ## ⚙️ Como Executar o Projeto
