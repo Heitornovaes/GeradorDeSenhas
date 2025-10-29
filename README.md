@@ -39,10 +39,8 @@ Aplicativo móvel desenvolvido em Flutter como exercício prático, com o objeti
 ## 📸 Telas (Screenshots)
 
 ![Tela de Splash](screenshots/1.png)
-_Descrição opcional da tela de splash._
 
 ![Tela de Introdução](screenshots/2.png)
-_Descrição opcional da tela de introdução._
 
 ![Tela de Login](screenshots/3.png)
 
