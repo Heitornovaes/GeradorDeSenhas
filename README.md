@@ -4,37 +4,37 @@ Aplicativo móvel desenvolvido em Flutter como exercício prático, com o objeti
 
 ## 🚀 Objetivo
 
-[cite_start]Criar um aplicativo Flutter integrado ao Firebase Authentication e Cloud Firestore, que permita o login/registro do usuário, gere senhas seguras através de uma API externa (Safekey API), e exiba uma lista com as senhas geradas pelo usuário autenticado[cite: 5].
+Criar um aplicativo Flutter integrado ao Firebase Authentication e Cloud Firestore, que permita o login/registro do usuário, gere senhas seguras através de uma API externa (Safekey API), e exiba uma lista com as senhas geradas pelo usuário autenticado.
 
 ## ✨ Funcionalidades Principais
 
-* [cite_start]**Autenticação de Usuário:** Sistema completo de Login e Registro utilizando **Firebase Authentication** (Email/Senha)[cite: 58].
-* [cite_start]**Introdução (Onboarding):** Tela de introdução exibida apenas no primeiro uso, com opção para não mostrar novamente (usando **SharedPreferences**)[cite: 31, 34, 35].
-* **Geração de Senhas:**
+**Autenticação de Usuário:** Sistema completo de Login e Registro utilizando **Firebase Authentication** (Email/Senha).
+**Introdução (Onboarding):** Tela de introdução exibida apenas no primeiro uso, com opção para não mostrar novamente (usando **SharedPreferences**).
+**Geração de Senhas:**
     * Consumo da API **Safekey** ([https://safekey-api-a1bd9aa97953.herokuapp.com/docs/](https://safekey-api-a1bd9aa97953.herokuapp.com/docs/)) via requisição `POST` com corpo `JSON`.
-    * [cite_start]Configuração de parâmetros: tamanho da senha (`Slider`), inclusão de maiúsculas, minúsculas, números e símbolos (`SwitchListTile`)[cite: 115, 120].
-    * [cite_start]Botão para copiar a senha gerada para a área de transferência[cite: 110].
-* [cite_start]**Armazenamento Seguro:** As senhas geradas são salvas no **Cloud Firestore**, vinculadas ao ID do usuário autenticado[cite: 81, 122]. [cite_start]Um `AlertDialog` solicita um rótulo para cada senha antes de salvar[cite: 122].
-* **Listagem e Gerenciamento:**
-    * [cite_start]A `HomeScreen` exibe as senhas salvas do usuário em tempo real, utilizando `StreamBuilder`[cite: 81].
-    * [cite_start]Funcionalidade para **deletar** senhas individualmente[cite: 83].
-    * [cite_start]Exibição de estado de lista vazia[cite: 82, 103].
-* **Interface:**
-    * [cite_start]Uso de animações **Lottie** na SplashScreen e IntroScreen[cite: 21, 32].
-    * [cite_start]Componentes reutilizáveis (ex: `CustomTextField`)[cite: 63].
-    * [cite_start]Feedback ao usuário com `SnackBar`s e indicadores de carregamento[cite: 61, 62, 121].
+    * Configuração de parâmetros: tamanho da senha (`Slider`), inclusão de maiúsculas, minúsculas, números e símbolos (`SwitchListTile`).
+    * Botão para copiar a senha gerada para a área de transferência.
+**Armazenamento Seguro:** As senhas geradas são salvas no **Cloud Firestore**, vinculadas ao ID do usuário autenticado. [cite_start]Um `AlertDialog` solicita um rótulo para cada senha antes de salvar.
+ **Listagem e Gerenciamento:**
+    * A `HomeScreen` exibe as senhas salvas do usuário em tempo real, utilizando `StreamBuilder`.
+    * Funcionalidade para **deletar** senhas individualmente.
+    * Exibição de estado de lista vazia.
+ **Interface:**
+    * Uso de animações **Lottie** na SplashScreen e IntroScreen.
+    * Componentes reutilizáveis (ex: `CustomTextField`).
+    * Feedback ao usuário com `SnackBar`s e indicadores de carregamento.
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Linguagem:** Dart
-* **Framework:** Flutter
-* **Backend:** Firebase
+ **Linguagem:** Dart
+**Framework:** Flutter
+**Backend:** Firebase
     * Firebase Authentication
     * Cloud Firestore
-* **Requisições HTTP:** Pacote `http`
-* **Armazenamento Local:** `shared_preferences`
-* **Animações:** `lottie`
-* **UI Auxiliar:** `smooth_page_indicator`, `email_validator`
+**Requisições HTTP:** Pacote `http`
+**Armazenamento Local:** `shared_preferences`
+**Animações:** `lottie`
+**UI Auxiliar:** `smooth_page_indicator`, `email_validator`
 
 ## 📸 Telas (Screenshots)
 
@@ -53,8 +53,8 @@ Aplicativo móvel desenvolvido em Flutter como exercício prático, com o objeti
 
 1.  **Clone o Repositório:**
     ```bash
-    git clone [URL_DO_SEU_REPOSITORIO]
-    cd [NOME_DA_PASTA_DO_PROJETO]
+    git clone [https://github.com/Heitornovaes/GeradorDeSenhas.git]
+    cd GeradorDeSenhas
     ```
 2.  **Configure o Ambiente Flutter:** Certifique-se de ter o [Flutter SDK](https://flutter.dev/docs/get-started/install) instalado e configurado corretamente no seu PATH.
 3.  **Configure o Firebase:**
